@@ -1,0 +1,28 @@
+﻿@model List<InitiativeModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-left">
+    <h5>Initiative (consisting of one or many projects) </h5>
+</div>
+<div class="text-center">
+    <h5>Initiatives List </h5>
+</div>
+<div class="text-center">
+    <table>
+    <tr>
+            <th>PriorityOrder</th>
+            <th>FixVersionName</th>
+            <th>ID</th>
+    </tr>
+        @foreach (var initative in Model)
+        {
+        <tr>
+            <td>@initative.PriorityOrder</td>
+            <td>@initative.FixVersionName</td>
+            <td>@initative.ID</td>  
+        </tr>
+        }
+</table>
+</div>

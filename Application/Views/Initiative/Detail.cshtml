@@ -1,0 +1,63 @@
+﻿@model InitiativeModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="text-left">
+    <h5>Initiative (consisting of one or many projects) </h5>
+</div>
+<div class="row">
+    <div class="col-md-8">
+
+        <h3>@Model.FixVersionName</h3>
+
+    </div>
+    <div class="col-md-4 float-end">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <label> Version Name</label>
+        <h6>@Model.FixVersionName</h6>
+
+    </div>
+    <div class="col-md-4 ">
+        <label> Priority Order</label>
+        <h6>@Model.PriorityOrder</h6>
+    </div>
+
+
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update Initiative</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            @using (Html.BeginForm("Update", "Initiative", FormMethod.Post))
+            {
+                <div class="modal-body">
+                    @Html.HiddenFor(x=>x.ID)
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Version Name:</label>
+                        @Html.TextBoxFor(x=>x.FixVersionName, new { htmlAttributes = new { @class = "form-control input-sm", @required = "true" }})
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Priority Order:</label>
+                        @Html.TextBoxFor(x=>x.PriorityOrder, new { htmlAttributes = new { @class = "form-control input-sm", @required = "true" }})
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
