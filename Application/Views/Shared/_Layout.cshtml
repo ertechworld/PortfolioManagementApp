@@ -21,7 +21,20 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div id="menu" class="navbar-collapse collapse d-sm-inline-flex justify-content-between"></div>
+                <div  class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Initiatives
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="menu" >
+                                
+
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
 
             </div>
         </nav>
@@ -46,10 +59,23 @@
     @await RenderSectionAsync("Scripts", required: false)
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $.get('@Url.Action("RenderMenu", "Home")', function (content) {
-                $("#menu").html(content);
-            });
+        $(document).ready(function () {            
+             $.ajax({
+                    type: "GET",
+                    url: "/api/Menu",
+                    success: function (result) {
+                       if(result){
+                           var row = '';
+                           for(let i=0;i<result.length;i++){
+                               row +='<a class="dropdown-item" asp-area="" asp-controller="Initiative" asp-action="Detail" asp-route-id="'+(i+1)+'">'+result[i]+'</a>';
+                           }
+                           if(row != ''){
+                                $("#menu").html(row);
+                           }
+                       }
+                    }
+
+                })
         });
     </script>
 </body>
